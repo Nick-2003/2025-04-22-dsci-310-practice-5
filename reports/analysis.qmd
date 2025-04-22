@@ -1,12 +1,13 @@
 ---
 title: "Tutorial 6: Refactoring R Code"
+bibliography: references.bib
 ---
 
 # Introduction
 
 In this tutorial, you will refactor the code into separate scripts corresponding to each section. The dataset we will use comes from the `palmerpenguins` package, which contains measurements of penguins from three species.
 
-The R programming language (R Core Team, 2019)  and the following R packages were used to perform the analysis:  knitr (Xie 2014), tidyverse (Wickham 2017), and Quarto (Allaire et al 2022).  *Note: this report is adapted from Timbers (2020).*
+The R programming language [@R]  and the following R packages were used to perform the analysis:  knitr [@knitr], tidyverse [@tidyverse], and Quarto [@Allaire_Quarto_2022]. 
 
 ## Load Libraries and Data
 
