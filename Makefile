@@ -32,7 +32,7 @@ work/output/summary.csv work/output/boxplot.png work/data/processed/penguins_cle
 	--input_path=work/data/raw/penguins.csv \
 	--output_path_summary=work/output/summary.csv \
 	--output_path_boxplot=work/output/boxplot.png \
-	--output_path_model=work/data/processed/penguins_cleaned.csv
+	--output_path_data=work/data/processed/penguins_cleaned.csv
 
 # For 03_model.R
 work/data/processed/penguins_train.csv work/data/processed/penguins_test.csv work/output/penguin_fit.rds: work/src/03_model.R work/data/processed/penguins_cleaned.csv

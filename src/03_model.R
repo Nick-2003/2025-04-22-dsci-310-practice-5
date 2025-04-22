@@ -1,6 +1,6 @@
 "Fit a classification model using `tidymodels` to predict the species of a penguin based on its physical characteristics.
 
-Usage: src/03_model.R --output_path=<output_path>
+Usage: src/03_model.R --input_path=<input_path> --output_path_train=<output_path_train> --output_path_test=<output_path_test> --output_path_model=<output_path_model>
 
 Options:
 --input_path=<input_path>

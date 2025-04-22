@@ -11,105 +11,79 @@ The R programming language [@R]  and the following R packages were used to perfo
 
 ## Load Libraries and Data
 
-```{r}
-#| echo: fenced
-library(tidyverse)
-library(palmerpenguins)
-library(tidymodels)
-library(regexcite20250416) # REPLACE WITH OWN LIBRARY
+```{r load}
+#| echo: false
+#| tbl-cap: Load libraries and data.
 
-data <- penguins
-
-# Initial cleaning: Remove missing values
-data <- data %>% drop_na()
+data <- readr::read_csv("~/work/data/raw/penguins.csv")
+knitr::kable(head(data))
 ```
 
 # Methods
 
 In this section, we perform exploratory data analysis (EDA) and prepare the data for modeling.
 
-```{r}
+```{r glimpse}
+#| echo: false
+#| tbl-cap: Glimpse at data.
+
 # Summary statistics
-glimpse(data)
-summary <- dplyr::summarise(data, mean_bill_length = mean(bill_length_mm), mean_bill_depth = mean(bill_depth_mm), mean_flipper_length = mean(flipper_length_mm), mean_body_mass = mean(body_mass_g))
+dplyr::glimpse(data)
+```
 
+```{r summary}
+#| echo: false
+#| tbl-cap: Summarise data.
 
-# Visualizations
-ggplot(data, aes(x = species, y = bill_length_mm, fill = species)) +
-  geom_boxplot() +
-  theme_minimal()
+# Summary statistics
+summary <- readr::read_csv("~/work/output/summary.csv")
+knitr::kable(data)
+```
+
+```{r clean}
+#| echo: false
+#| tbl-cap: Prepare data for modelling.
 
 # Prepare data for modeling
-data <- data %>%
-  select(species, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g) %>%
-  mutate(species = as.factor(species))
+data <- readr::read_csv("~/work/data/processed/penguins_cleaned.csv")
+knitr::kable(head(data))
 ```
 
 # Model
 
 We will fit a classification model using `tidymodels` to predict the species of a penguin based on its physical characteristics.
 
-```{r}
-# Split data
-set.seed(123)
-data_split <- initial_split(data, strata = species)
-train_data <- training(data_split)
-test_data <- testing(data_split)
-
-# Define model
-penguin_model <- nearest_neighbor(mode = "classification", neighbors = 5) %>%
-  set_engine("kknn")
-
-# Create workflow
-penguin_workflow <- workflow() %>%
-  add_model(penguin_model) %>%
-  add_formula(species ~ .)
+```{r fit}
+#| echo: false
+#| tbl-cap: Fit classification model.
 
 # Fit model
-penguin_fit <- penguin_workflow %>%
-  fit(data = train_data)
+penguin_fit <- readr::read_rds("~/work/output/penguin_fit.rds")
+knitr::kable(summary(data))
 ```
 
 # Results
 
 We evaluate the performance of the model using the test dataset.
 
-```{r}
-# Predict on test data
-predictions <- predict(penguin_fit, test_data, type = "class") %>%
-  bind_cols(test_data)
+```{r result}
+#| echo: false
+#| tbl-cap: Model results.
 
-# Confusion matrix
-conf_mat <- conf_mat(predictions, truth = species, estimate = .pred_class)
-conf_mat
+conf_mat <- readr::read_rds("~/work/output/conf_mat.rds")
+knitr::kable(conf_mat$table)
 ```
 
 ## Libraries Run
 
 Test the usage of packages in the report.
 
-```{r}
-# Explicit namespace use
-calls <- c("regexcite20250416::is_leap(2000)", 
-           "regexcite20250416::is_leap(1900)", 
-           "regexcite20250416::temp_conv(41, 'F', 'C')")
+```{r pack}
+#| echo: false
+#| tbl-cap: Test the usage of packages in the report.
 
-# Evaluate each safely
-outputs <- sapply(calls, function(call) {
-  tryCatch({
-    eval(parse(text = call))
-  }, error = function(e) {
-    paste("Error:", e$message)
-  })
-})
-
-# Create dataframe
-func_outputs <- data.frame(
-  Function = calls,
-  Output = outputs,
-  stringsAsFactors = FALSE
-)
-func_outputs
+func_outputs <- readr::read_csv("~/work/output/summary.csv")
+knitr::kable(func_outputs)
 ```
 
 # Conclusion
