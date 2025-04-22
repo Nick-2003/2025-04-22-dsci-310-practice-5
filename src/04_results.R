@@ -29,4 +29,4 @@ conf_mat <- yardstick::conf_mat(predictions, truth = species, estimate = .pred_c
 conf_mat
 
 # Save results
-readr::write_rds(conf_mat, opt$output_path)
+readr::write_rds(conf_mat, opt$output_path) # work/output/conf_mat.rds

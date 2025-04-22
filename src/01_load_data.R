@@ -19,4 +19,4 @@ data <- penguins
 # Initial cleaning: Remove missing values
 data <- data %>% drop_na()
 
-readr::write_csv(data, opt$output_path)
+readr::write_csv(data, opt$output_path) # work/data/raw/penguins.csv

@@ -35,4 +35,4 @@ func_outputs <- data.frame(
 func_outputs
 
 # Save dataframe
-readr::write_csv(func_outputs, opt$output_path)
+readr::write_csv(func_outputs, opt$output_path) # work/output/func_outputs.csv

@@ -42,6 +42,6 @@ penguin_fit <- penguin_workflow %>%
   parsnip::fit(data = train_data)
 
 # Save models
-readr::write_rds(penguin_fit, opt$output_path_model)
-readr::write_csv(train_data, opt$output_path_train)
-readr::write_csv(test_data, opt$output_path_test)
+readr::write_csv(train_data, opt$output_path_train) # work/data/processed/penguins_train.csv
+readr::write_csv(test_data, opt$output_path_test) # work/data/processed/penguins_test.csv
+readr::write_rds(penguin_fit, opt$output_path_model) # work/output/penguin_fit.rds

@@ -31,6 +31,6 @@ data <- data %>%
   dplyr::mutate(species = as.factor(species))
 
 # Save cleaned data
-readr::write_csv(summary, opt$output_path_summary)
-ggplot2::ggsave(opt$output_path_boxplot, boxplot)
-readr::write_csv(data, opt$output_path)
+readr::write_csv(summary, opt$output_path_summary) # work/output/summary.csv
+ggplot2::ggsave(opt$output_path_boxplot, boxplot) # work/output/boxplot.png
+readr::write_csv(data, opt$output_path) # work/data/processed/penguins_cleaned.csv
